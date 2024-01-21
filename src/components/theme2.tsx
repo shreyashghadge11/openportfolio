@@ -1,4 +1,4 @@
-// Theme1.tsx
+// Theme2.tsx
 
 import React from "react";
 import {
@@ -14,10 +14,10 @@ import techStackIcons from "../utils/techIcons";
 import { RiExternalLinkLine, RiGithubFill } from "react-icons/ri"; 
 import { PortfolioData } from "../pages/dashboard";
 
-const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => {
+const Theme2: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => {
   // Replace these with actual user information
   const user = {
-    name: "John Doe",
+    name: "John Doe 2",
     title: "Web Developer",
     intro: "Passionate about creating awesome web experiences.",
     profileImage: portfolioData.profileImage || profileImg,
@@ -70,24 +70,24 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
   };
 
   return (
-    <div className="lg:max-w-[100%] mx-auto font-mono border">
+    <div className="lg:max-w-[100%] mx-auto font-mono border bg-black">
       {/* Navbar */}
       <nav className=" p-4 sticky">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-black font-bold text-4xl">{user.name}</div>
+          <div className="text-white font-bold text-4xl">{user.name}</div>
           <div className="hidden lg:flex space-x-4">
-            <a href="#projects" className="text-black font text-xl py-2">
+            <a href="#projects" className="text-white font text-xl py-2">
               Projects
             </a>
-            <a href="#skills" className="text-black font text-xl py-2">
+            <a href="#skills" className="text-white font text-xl py-2">
               Skills
             </a>
-            <a href="#contact" className="text-black font text-xl py-2">
+            <a href="#contact" className="text-white font text-xl py-2">
               Contact Me
             </a>
             <a
               href="#contact"
-              className="text-white border px-4 py-2 rounded-full bg-black"
+              className="text-black border px-4 py-2 rounded-full bg-white"
             >
               Hire Me
             </a>
@@ -96,23 +96,23 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
       </nav>
 
       {/* Profile Section */}
-      <div className="container mx-auto mt-12 mb-12 flex lg:w-[80%]  lg:flex-row items-center justify-around min-h-[80vh] flex-col px-2 text-center lg:text-start">
+      <div className="container mx-auto mt-12 mb-12 flex  lg:flex-row items-center justify-around min-h-[80vh] flex-col px-2 text-center lg:text-start lg:w-[80%]">
         <div className=" ">
-          <h1 className="text-2xl font-semibold text-gray-600 mb-2">
+          <h1 className="text-2xl font-semibold text-gray-200 mb-2">
             Hello I'm
           </h1>
-          <h1 className="text-6xl font-bold mb-2">{user.name}</h1>
-          <h2 className="text-2xl font-semibold text-gray-600 mb-4">
+          <h1 className="text-6xl text-white font-bold mb-2">{user.name}</h1>
+          <h2 className="text-2xl font-semibold text-gray-200 mb-4">
             {user.title}
           </h2>
-          <p className="mb-4 text-2xl">{user.intro}</p>
+          <p className="mb-4 text-white text-2xl">{user.intro}</p>
           <div className="flex justify-center lg:justify-start">
-            <div className="flex space-x-4 mb-4 border-2 border-black rounded-full px-4 py-2">
+            <div className="flex space-x-4 mb-4 border-2 border-white rounded-full px-4 py-2">
               <a
                 href={`https://github.com/${user.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black"
+                className="text-white"
               >
                 <FaGithub size={24} />
               </a>
@@ -120,18 +120,18 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
                 href={`https://twitter.com/${user.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black"
+                className="text-white"
               >
                 <FaTwitter size={24} />
               </a>
-              <a href={`mailto:${user.email}`} className="text-black">
+              <a href={`mailto:${user.email}`} className="text-white">
                 <FaEnvelope size={24} />
               </a>
               <a
                 href={`https://www.linkedin.com/in/${user.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black"
+                className="text-white"
               >
                 <FaLinkedin size={24} />
               </a>
@@ -143,7 +143,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
                 href={user.resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black text-white py-2 px-4 rounded-full"
+                className="bg-white text-black py-2 px-4 rounded-full"
               >
                 View Resume
               </a>
@@ -154,24 +154,24 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
           <img
             src={user.profileImage}
             alt="Profile"
-            className="rounded-full w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] mb-4 lg:mb-5 lg:mr-4 shadow-lg"
+            className="rounded-full border border-white border-4 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] mb-4 lg:mb-5 lg:mr-4 shadow-lg"
           />
         </div>
       </div>
       {/* Tech Stack Section */}
       <div
-        className="container mx-auto mt-18 mb-8 items-center lg:w-[70%] "
+        className="container mx-auto mt-18 mb-8 items-center lg:w-[70%] text-white"
         id="skills"
       >
         <div className="items-center text-center">
           {" "}
-          <h1 className="text-4xl font-bold mb-2">Tech Stack</h1>
+          <h1 className="text-4xl font-bold mb-2 text-white">Tech Stack</h1>
         </div>
         <div className="flex flex-wrap justify-center">
           {user.techStack.map((tech) => (
             <div className="flex flex-col items-center justify-center m-4 max-w-[100px] ">
               {techStackIcons[tech]}
-              <p className="text-black">{tech}</p>
+              <p className="text-white">{tech}</p>
             </div>
           ))}
         </div>
@@ -179,7 +179,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
       {/* Projects Section */}
 
       <div
-        className="container mx-auto mt-28 mb-8 items-center lg:w-[100%] pt-30 font-mono"
+        className="container mx-auto mt-28 mb-8 items-center lg:w-[80%] pt-30 font-mono"
         id="projects"
       >
         <div className="items-center text-center">
@@ -189,12 +189,12 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
           {user.projects?.map((project) => (
             <div
               key={project.id}
-              className="flex flex-col items-center justify-center m-4 max-w-[300px] shadow-lg p-4 rounded-md hover:w-full hover:shadow-xl transition duration-300 ease-in-out hover:zoom-in"
+              className="flex flex-col items-center border border-white justify-center m-4 max-w-[300px] shadow-lg shadow-white p-4 rounded-md hover:w-full hover:shadow-xl transition duration-300 ease-in-out hover:zoom-in"
             >
               <img
                 src={project.imageUrl}
                 alt={project.title}
-                className="rounded-md mb-2 shadow-md hover:w-full transition duration-300 ease-in-out hover:shadow-xl"
+                className="rounded-md mb-2 shadow-md shadow-white hover:w-full transition duration-300 ease-in-out hover:shadow-xl"
                 style={{ width: "100%", height: "auto" }}
               />
               <h2 className="text-xl font- mb-2">{project.title}</h2>
@@ -203,7 +203,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
                   href={project.demoLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-white px-4 py-2 rounded-full flex items-center"
+                  className="bg-white text-black px-4 py-2 rounded-full flex items-center"
                 >
                   <RiExternalLinkLine className="mr-2" />
                   Demo
@@ -223,7 +223,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
         </div>
         {/* Contact Section */}
         <div
-          className="container mx-auto mt-28 mb-8 items-center lg:w-[50%] justify-center"
+          className="container mx-auto mt-28 mb-8 items-center lg:w-[50%] justify-center text-white"
           id="contact"
         >
           <div className="items-center text-center">
@@ -232,7 +232,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
           <div className="mb-4">
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-100"
             >
               Your Email Address
             </label>
@@ -246,7 +246,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
           <div className="mb-4">
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-100"
             >
               Email Subject
             </label>
@@ -262,7 +262,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
           <div className="mb-4">
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-100"
             >
               Message
             </label>
@@ -276,7 +276,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
 
           {/* Send Button with Icon */}
           <div className="flex justify-center">
-          <button className="bg-black text-white px-4 py-2 rounded-full flex items-center">
+          <button className="bg-white text-black px-4 py-2 rounded-full flex items-center">
             <FaPaperPlane className="mr-2" />
             Send
           </button>
@@ -289,7 +289,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
             href={`https://github.com/${user.github}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black"
+            className="text-white"
           >
             <FaGithub size={24} />
           </a>
@@ -297,26 +297,26 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
             href={`https://twitter.com/${user.twitter}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black"
+            className="text-white"
           >
             <FaTwitter size={24} />
           </a>
-          <a href={`mailto:${user.email}`} className="text-black">
+          <a href={`mailto:${user.email}`} className="text-white">
             <FaEnvelope size={24} />
           </a>
           <a
             href={`https://www.linkedin.com/in/${user.linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black"
+            className="text-white"
           >
             <FaLinkedin size={24} />
           </a>
         </div>
 
         {/* Made with Love */}
-        <p className="mt-4 text-gray-600">
-          Made with <span className="text-red-600">&#x2764;&#xFE0E;</span> by OpenPortfolio
+        <p className="mt-4 text-gray-100">
+          Made with <span className="text-red-500">&#x2764;&#xFE0E;</span> by OpenPortfolio
         </p>
       </footer>
       </div>
@@ -324,4 +324,4 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({portfolioData}) => 
   );
 };
 
-export default Theme1;
+export default Theme2;

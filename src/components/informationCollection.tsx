@@ -7,6 +7,7 @@ import {
   FaTwitter,
   FaFileAlt,
   FaEnvelope,
+  FaAngleDoubleLeft
 } from "react-icons/fa";
 
 export interface Project {
@@ -22,19 +23,18 @@ const PortfolioInformationCollection: React.FC<{
     name: string;
     title: string;
     introduction: string;
+    profileImage: string;
     github: string;
     twitter: string;
     email: string;
     linkedin: string;
     resume: string;
-    frontendTechStack: string;
-    backendTechStack: string;
-    devOpsTechStack: string;
-    otherTools: string;
+    skills: string;
     projects: Project[];
   };
   onChange: (field: string, value: string | Project[]) => void;
 }> = ({ data, onChange }) => {
+
   const handleInputChange = (
     field: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -65,13 +65,25 @@ const PortfolioInformationCollection: React.FC<{
       const reader = new FileReader();
       reader.onloadend = () => {
         const updatedProjects = data.projects.map((project) =>
-          project.id === projectId ? { ...project, image: reader.result as string } : project
+          project.id === projectId
+            ? { ...project, image: reader.result as string }
+            : project
         );
         onChange("projects", updatedProjects);
       };
       reader.readAsDataURL(file);
     }
   };
+
+  const handleProfileImageChange = (file: File | null) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onChange("profileImage", reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   const handleDeleteProject = (projectId: number) => {
     const updatedProjects = data.projects.filter(
@@ -82,7 +94,7 @@ const PortfolioInformationCollection: React.FC<{
   console.log(data);
 
   return (
-    <div>
+    <div className="font-serif">
       <div className="mb-4">
         <label
           htmlFor="name"
@@ -97,6 +109,21 @@ const PortfolioInformationCollection: React.FC<{
           onChange={(e) => handleInputChange("name", e)}
           className="mt-1 p-2 w-full border rounded-md shadow-md"
           placeholder="Enter your name"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="profilePicture"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Profile Picture
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => handleProfileImageChange(e.target.files?.[0] || null)}
+          className="p-2 border w-full rounded-md shadow-md"
         />
       </div>
       <div className="mb-4">
@@ -220,125 +247,85 @@ const PortfolioInformationCollection: React.FC<{
           placeholder="Enter your email"
         />
       </div>
-      <div className="mb-4 flex items-center ">
+      <div className="mb-4">
         <label
-          htmlFor="frontendTechStack"
-          className="block pr-2 text-sm font-medium text-gray-700"
+          htmlFor="skills"
+          className="block text-sm font-medium text-gray-700"
         >
-          Frontend Skills
+          Skills
         </label>
-        <input
-          type="text"
-          id="frontendTechStack"
-          value={data.github}
-          onChange={(e) => handleInputChange("frontendTechStack", e)}
+        <textarea
+          id="skills"
+          value={data.introduction}
+          onChange={(e) => handleInputChange("skills", e)}
           className="mt-1 p-2 w-full border rounded-md shadow-md"
-          placeholder="Enter your Frontend Skills (comma separated)"
+          placeholder="Enter your Skills (Frontend, Backend, DevOps, Other Tools comma separated)"
         />
       </div>
-      <div className="mb-4 flex items-center ">
-        <label
-          htmlFor="backendTechStack"
-          className="block pr-2 text-sm font-medium text-gray-700"
-        >
-          Backend Skills
-        </label>
-        <input
-          type="text"
-          id="backendTechStack"
-          value={data.github}
-          onChange={(e) => handleInputChange("backendTechStack", e)}
-          className="mt-1 p-2 w-full border rounded-md shadow-md"
-          placeholder="Enter your Backend Skills (comma separated)"
-        />
-      </div>
-      <div className="mb-4 flex items-center ">
-        <label
-          htmlFor="devopsTechStack"
-          className="block pr-2 text-sm font-medium text-gray-700"
-        >
-          Devops Skills
-        </label>
-        <input
-          type="text"
-          id="devopsTechStack"
-          value={data.github}
-          onChange={(e) => handleInputChange("devopsTechStack", e)}
-          className="mt-1 p-2 w-full border rounded-md shadow-md"
-          placeholder="Enter your Devops Skills (comma separated)"
-        />
-      </div>
-      <div className="mb-4 flex items-center ">
-        <label
-          htmlFor="otherTools"
-          className="block pr-2 text-sm font-medium text-gray-700"
-        >
-            Other Tools
-        </label>
-        <input
-          type="text"
-          id="otherTools"
-          value={data.github}
-          onChange={(e) => handleInputChange("otherTools", e)}
-          className="mt-1 p-2 w-full border rounded-md shadow-md"
-          placeholder="Enter your Other Tools Skills (comma separated)"
-        />
-      </div>
+
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">
           Projects
         </label>
         {data.projects?.map((project) => (
-          <div key={project.id} className="mb-2 ">
+          <div key={project.id} className="mb-4 py-4">
             <label className="block text-sm font-medium text-gray-700">
-              Project {project.id}
+              Project 
             </label>
-            <div className="flex space-x-4">
+
+            <div className="flex flex-col space-y-2">
               <input
                 type="text"
                 value={project.name}
                 onChange={(e) =>
                   handleProjectChange("name", e.target.value, project.id)
                 }
-                className="p-2 w-1/3 border rounded-md shadow-md"
+                className="p-2 border rounded-md shadow-md"
                 placeholder="Project Name"
               />
+
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => handleFileChange(project.id, e.target.files?.[0] || null)}
-                className="p-2 w-1/3 border rounded-md shadow-md"
+                onChange={(e) =>
+                  handleFileChange(project.id, e.target.files?.[0] || null)
+                }
+                className="p-2 border rounded-md shadow-md"
               />
+
               <input
                 type="text"
                 value={project.demoLink}
                 onChange={(e) =>
                   handleProjectChange("demoLink", e.target.value, project.id)
                 }
-                className="p-2 w-1/3 border rounded-md shadow-md"
+                className="p-2 border rounded-md shadow-md"
                 placeholder="Demo Link"
               />
+
               <input
                 type="text"
                 value={project.githubLink}
                 onChange={(e) =>
                   handleProjectChange("githubLink", e.target.value, project.id)
                 }
-                className="p-2 w-1/3 border rounded-md shadow-md"
+                className="p-2 border rounded-md shadow-md"
                 placeholder="GitHub Link"
               />
+
               <button
                 onClick={() => handleDeleteProject(project.id)}
-                className="bg-red-500 text-white px-2 rounded-full shadow-md"
+                className="bg-red-500 text-white px-2 py-1 rounded-full shadow-md w-1/4"
               >
-                Delete
+                <FaAngleDoubleLeft className="inline-block mr-2" /> Delete
               </button>
             </div>
           </div>
         ))}
+
         <button
           onClick={handleAddProject}
-          className="bg-green-500 text-white px-2 rounded-full shadow-md"
+          className="bg-[#5E17EB] text-white px-2 py-2 rounded-full shadow-md"
         >
           Add Project
         </button>
