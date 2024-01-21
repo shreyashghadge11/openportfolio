@@ -40,7 +40,7 @@ import {
   DiSublime,
   DiWebplatform,
   DiRasberryPi,
-} from "react-icons/di";
+} from 'react-icons/di';
 import {
   SiVuedotjs,
   SiWordpress,
@@ -80,7 +80,7 @@ import {
   SiYarn,
   SiBabel,
   SiWebpack,
-} from "react-icons/si";
+} from 'react-icons/si';
 
 interface TechStackIcon {
   [key: string]: JSX.Element;

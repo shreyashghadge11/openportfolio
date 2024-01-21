@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ModalProps {
   closeModal: () => void;
@@ -14,32 +14,32 @@ const Modal: React.FC<ModalProps> = ({
   handleReceiveEmail,
 }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-md shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6">Forgot Password</h2>
-        <div className="mb-4">
+    <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+      <div className='p-8 bg-white rounded-md shadow-md w-96'>
+        <h2 className='mb-6 text-2xl font-bold'>Forgot Password</h2>
+        <div className='mb-4'>
           <label
-            htmlFor="forgot-email"
-            className="block text-sm font-medium text-gray-700"
+            htmlFor='forgot-email'
+            className='block text-sm font-medium text-gray-700'
           >
             Email
           </label>
           <input
-            type="email"
-            id="forgot-email"
+            type='email'
+            id='forgot-email'
             value={email}
             onChange={handleEmailChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            placeholder="Enter your email"
+            className='w-full p-2 mt-1 border rounded-md'
+            placeholder='Enter your email'
           />
         </div>
         <button
           onClick={handleReceiveEmail}
-          className="bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full"
+          className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full'
         >
           Receive Email
         </button>
-        <button onClick={closeModal} className="mt-4 text-black">
+        <button onClick={closeModal} className='mt-4 text-black'>
           Cancel
         </button>
       </div>

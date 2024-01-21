@@ -1,11 +1,11 @@
 // LoginPage.tsx
 
-import React, { useState } from "react";
-import Modal from "../components/modal";
+import React, { useState } from 'react';
+import Modal from '../components/modal';
 
 const LoginPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const openModal = () => {
     setShowModal(true);
@@ -26,50 +26,50 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
-      <div className="bg-white p-8 rounded-md shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+    <div className='min-h-[80vh] flex items-center justify-center'>
+      <div className='p-8 bg-white rounded-md shadow-lg w-96'>
+        <h2 className='mb-6 text-2xl font-bold'>Login</h2>
 
         {/* Email Input */}
-        <div className="mb-4">
+        <div className='mb-4'>
           <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
+            htmlFor='email'
+            className='block text-sm font-medium text-gray-700'
           >
             Email
           </label>
           <input
-            type="email"
-            id="email"
-            className="mt-1 p-2 w-full border rounded-md"
-            placeholder="Enter your email"
+            type='email'
+            id='email'
+            className='w-full p-2 mt-1 border rounded-md'
+            placeholder='Enter your email'
           />
         </div>
 
         {/* Password Input */}
-        <div className="mb-4">
+        <div className='mb-4'>
           <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
+            htmlFor='password'
+            className='block text-sm font-medium text-gray-700'
           >
             Password
           </label>
           <input
-            type="password"
-            id="password"
-            className="mt-1 p-2 w-full border rounded-md"
-            placeholder="Enter your password"
+            type='password'
+            id='password'
+            className='w-full p-2 mt-1 border rounded-md'
+            placeholder='Enter your password'
           />
         </div>
 
         {/* Login Button */}
-        <button className="bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full">
+        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full'>
           Login
         </button>
 
         {/* Forgot Password Text */}
-        <p className="mt-4 text-sm text-gray-600">
-          <button onClick={openModal} className="text-blue-500">
+        <p className='mt-4 text-sm text-gray-600'>
+          <button onClick={openModal} className='text-blue-500'>
             Forgot Password?
           </button>
         </p>
