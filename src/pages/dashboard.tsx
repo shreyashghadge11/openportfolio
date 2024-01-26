@@ -16,7 +16,7 @@ export interface PortfolioData {
   email: string;
   linkedin: string;
   resume: string;
-  skills: string;
+  skills: string[];
   projects: Project[];
 }
 
@@ -31,14 +31,14 @@ const Dashboard: React.FC = () => {
     email: '',
     linkedin: '',
     resume: '',
-    skills: '',
+    skills: [],
     projects: [{ id: 1, name: '', image: '', demoLink: '', githubLink: '' }],
   });
 
   const themes = ['theme1', 'theme2'];
   const [selectedTheme, setSelectedTheme] = useState('1');
 
-  const handleInputChange = (field: string, value: string | Project[]) => {
+  const handleInputChange = (field: string, value: string | string[] | Project[]) => {
     setPortfolioData((prevData) => ({
       ...prevData,
       [field]: value,

@@ -29,11 +29,12 @@ const PortfolioInformationCollection: React.FC<{
     email: string;
     linkedin: string;
     resume: string;
-    skills: string;
+    skills: string[];
     projects: Project[];
   };
-  onChange: (field: string, value: string | Project[]) => void;
+  onChange: (field: string, value: string | string[] | Project[]) => void;
 }> = ({ data, onChange }) => {
+
   const handleInputChange = (
     field: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -90,8 +91,11 @@ const PortfolioInformationCollection: React.FC<{
     );
     onChange('projects', updatedProjects);
   };
-  console.log(data);
 
+  const handleSkillChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const skillsArray = e.target.value.split(',').map((skill) => skill.trim().toLowerCase());
+    onChange('skills', skillsArray);
+  };
   return (
     <div className='font-serif'>
       <div className='mb-4'>
@@ -258,7 +262,7 @@ const PortfolioInformationCollection: React.FC<{
         <textarea
           id='skills'
           value={data.skills}
-          onChange={(e) => handleInputChange('skills', e)}
+          onChange={(e) => handleSkillChange(e)}
           className='w-full p-2 mt-1 border rounded-md shadow-md'
           placeholder='Enter your Skills (Frontend, Backend, DevOps, Other Tools comma separated)'
         />

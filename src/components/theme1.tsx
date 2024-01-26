@@ -76,7 +76,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
       {/* Navbar */}
       <nav className='sticky p-4 '>
         <div className='container flex items-center justify-between mx-auto'>
-          <div className='text-4xl font-bold text-black'>{user.name}</div>
+          <div className='text-4xl font-bold text-black'>{portfolioData.name}</div>
           <div className='hidden space-x-4 lg:flex'>
             <a href='#projects' className='py-2 text-xl text-black font'>
               Projects
@@ -103,15 +103,15 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
           <h1 className='mb-2 text-2xl font-semibold text-gray-600'>
             Hello I'm
           </h1>
-          <h1 className='mb-2 text-6xl font-bold'>{user.name}</h1>
+          <h1 className='mb-2 text-6xl font-bold'>{portfolioData.name}</h1>
           <h2 className='mb-4 text-2xl font-semibold text-gray-600'>
-            {user.title}
+            {portfolioData.title}
           </h2>
-          <p className='mb-4 text-2xl'>{user.intro}</p>
+          <p className='mb-4 text-2xl'>{portfolioData.introduction}</p>
           <div className='flex justify-center lg:justify-start'>
             <div className='flex px-4 py-2 mb-4 space-x-4 border-2 border-black rounded-full'>
               <a
-                href={`https://github.com/${user.github}`}
+                href={`https://github.com/${portfolioData.github}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-black'
@@ -119,18 +119,18 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
                 <FaGithub size={24} />
               </a>
               <a
-                href={`https://twitter.com/${user.twitter}`}
+                href={`https://twitter.com/${portfolioData.twitter}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-black'
               >
                 <FaTwitter size={24} />
               </a>
-              <a href={`mailto:${user.email}`} className='text-black'>
+              <a href={`mailto:${portfolioData.email}`} className='text-black'>
                 <FaEnvelope size={24} />
               </a>
               <a
-                href={`https://www.linkedin.com/in/${user.linkedin}`}
+                href={`https://www.linkedin.com/in/${portfolioData.linkedin}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-black'
@@ -142,7 +142,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
             {/* View Resume Button */}
             <div className='mt-3 ml-4'>
               <a
-                href={user.resumeLink}
+                href={portfolioData.resume}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='px-4 py-2 text-white bg-black rounded-full'
@@ -154,8 +154,8 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
         </div>
         <div className='lg'>
           <img
-            src={user.profileImage}
-            alt='Profile'
+            src={portfolioData.profileImage || profileImg}
+            alt='Profile Image'
             className='rounded-full w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] mb-4 lg:mb-5 lg:mr-4 shadow-lg'
           />
         </div>
@@ -170,7 +170,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
           <h1 className='mb-2 text-4xl font-bold'>Tech Stack</h1>
         </div>
         <div className='flex flex-wrap justify-center'>
-          {user.techStack.map((tech) => (
+          {portfolioData.skills.map((tech) => (
             <div className='flex flex-col items-center justify-center m-4 max-w-[100px] '>
               {techStackIcons[tech]}
               <p className='text-black'>{tech}</p>
@@ -188,18 +188,18 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
           <h1 className='mb-2 text-4xl font-bold'>Projects</h1>
         </div>
         <div className='flex flex-row flex-wrap justify-center'>
-          {user.projects?.map((project) => (
+          {portfolioData.projects?.map((project) => (
             <div
               key={project.id}
               className='flex flex-col items-center justify-center m-4 max-w-[300px] shadow-lg p-4 rounded-md hover:w-full hover:shadow-xl transition duration-300 ease-in-out hover:zoom-in'
             >
               <img
-                src={project.imageUrl}
-                alt={project.title}
+                src={project.image}
+                alt={project.name}
                 className='mb-2 transition duration-300 ease-in-out rounded-md shadow-md hover:w-full hover:shadow-xl'
                 style={{ width: '100%', height: 'auto' }}
               />
-              <h2 className='mb-2 text-xl font-'>{project.title}</h2>
+              <h2 className='mb-2 text-xl font-'>{project.name}</h2>
               <div className='flex space-x-4'>
                 <a
                   href={project.demoLink}
@@ -288,7 +288,7 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
           {/* Social Links */}
           <div className='flex justify-center space-x-4'>
             <a
-              href={`https://github.com/${user.github}`}
+              href={`https://github.com/${portfolioData.github}`}
               target='_blank'
               rel='noopener noreferrer'
               className='text-black'
@@ -296,18 +296,18 @@ const Theme1: React.FC<{ portfolioData: PortfolioData }> = ({
               <FaGithub size={24} />
             </a>
             <a
-              href={`https://twitter.com/${user.twitter}`}
+              href={`https://twitter.com/${portfolioData.twitter}`}
               target='_blank'
               rel='noopener noreferrer'
               className='text-black'
             >
               <FaTwitter size={24} />
             </a>
-            <a href={`mailto:${user.email}`} className='text-black'>
+            <a href={`mailto:${portfolioData.email}`} className='text-black'>
               <FaEnvelope size={24} />
             </a>
             <a
-              href={`https://www.linkedin.com/in/${user.linkedin}`}
+              href={`https://www.linkedin.com/in/${portfolioData.linkedin}`}
               target='_blank'
               rel='noopener noreferrer'
               className='text-black'
