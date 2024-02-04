@@ -2,10 +2,25 @@
 
 import React, { useState } from 'react';
 import Modal from '../components/modal';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { login } from '../slices/userSlice';
 
 const LoginPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { isAuthenticated } = useAppSelector((state) => state.user);
+
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, []);
+
 
   const openModal = () => {
     setShowModal(true);
@@ -25,6 +40,11 @@ const LoginPage: React.FC = () => {
     closeModal();
   };
 
+  const handleLogin = () => {
+    console.log(email, password)
+    dispatch(login({ email, password }));
+    navigate('/dashboard');
+  };
   return (
     <div className='min-h-[80vh] flex items-center justify-center'>
       <div className='p-8 bg-white rounded-md shadow-lg w-96'>
@@ -43,6 +63,7 @@ const LoginPage: React.FC = () => {
             id='email'
             className='w-full p-2 mt-1 border rounded-md'
             placeholder='Enter your email'
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -59,11 +80,12 @@ const LoginPage: React.FC = () => {
             id='password'
             className='w-full p-2 mt-1 border rounded-md'
             placeholder='Enter your password'
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         {/* Login Button */}
-        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full'>
+        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full' onClick={handleLogin}>
           Login
         </button>
 

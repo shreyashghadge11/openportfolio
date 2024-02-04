@@ -5,6 +5,9 @@ import Theme1 from '../components/theme1';
 import PortfolioInformationCollection from '../components/informationCollection';
 import { Project } from '../components/informationCollection';
 import Theme2 from '../components/theme2';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useNavigate } from 'react-router-dom';
+
 
 export interface PortfolioData {
   name: string;
@@ -34,6 +37,20 @@ const Dashboard: React.FC = () => {
     skills: [],
     projects: [{ id: 1, name: '', image: '', demoLink: '', githubLink: '' }],
   });
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { email, isAuthenticated, username, error, isLoading } = useAppSelector((state) => state.user);
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token') === null){
+      dispatch({ type: 'user/logout' });
+      navigate('/login');
+    }
+    else{
+      dispatch({ type: 'user/login', payload: { email: email, username: username } });
+    }
+  }, []);
 
   const themes = ['theme1', 'theme2'];
   const [selectedTheme, setSelectedTheme] = useState('1');
@@ -80,6 +97,10 @@ const Dashboard: React.FC = () => {
         return null;
     }
   };
+
+  if (isAuthenticated === false) {
+    navigate('/login');
+  }
 
   return (
     <div className='container mx-auto pt-8 grid grid-cols-12 gap-4 min-height-[90vh]'>
