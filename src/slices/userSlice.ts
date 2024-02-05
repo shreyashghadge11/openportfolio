@@ -21,11 +21,10 @@ export const login = createAsyncThunk(
     // });
     // const res = await response.json();
     const res = {
-        token: "token",
-        email: "email",
-        username: "username"
-    }
-    console.log(data)
+      token: "token",
+      email: "email",
+      username: "username",
+    };
     if (true) {
       localStorage.setItem("token", res.token);
       const expirationDate = new Date();
@@ -33,15 +32,41 @@ export const login = createAsyncThunk(
       localStorage.setItem("tokenExpiry", expirationDate.getTime().toString());
       return res;
     } else {
-      throw new Error('error');
+      throw new Error("error");
+    }
+  }
+);
+
+export const validateToken = createAsyncThunk(
+  "user/validateToken",
+  async (token: string) => {
+    // const response = await fetch("http://localhost:4000/validateToken", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ token }),
+    // });
+    // const res = await response.json();
+    const res = {
+      token: "token",
+      email: "email",
+      username: "username",
+      error: "error",
+      isAuthenticated: true,
+    };
+    if (true) {
+      return res;
+    } else {
+      throw new Error("error");
     }
   }
 );
 
 export const logout = createAsyncThunk("user/logout", async () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("tokenExpiry");
-    return;
+  localStorage.removeItem("token");
+  localStorage.removeItem("tokenExpiry");
+  return;
 });
 
 export const signup = createAsyncThunk(
@@ -105,6 +130,19 @@ const userSlice = createSlice({
     builder.addCase(signup.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
+    });
+    builder.addCase(validateToken.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(validateToken.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = action.payload.isAuthenticated;
+      state.email = action.payload.email;
+      state.username = action.payload.username;
+    });
+    builder.addCase(validateToken.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = false;
     });
   },
 });

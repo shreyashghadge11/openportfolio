@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Modal from '../components/modal';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { login } from '../slices/userSlice';
+import { login, validateToken } from '../slices/userSlice';
 
 const LoginPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,11 +14,20 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isAuthenticated } = useAppSelector((state) => state.user);
 
-
   React.useEffect(() => {
     if (isAuthenticated) {
       navigate('/dashboard');
     }
+
+    if (localStorage.getItem('token') !== null) {
+      dispatch(validateToken(localStorage.getItem('token') as string))
+      .unwrap()
+      .then((user) => {
+        console.log(user);
+        navigate('/dashboard');
+      })
+    }
+    
   }, []);
 
 
@@ -42,8 +51,16 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = () => {
     console.log(email, password)
-    dispatch(login({ email, password }));
-    navigate('/dashboard');
+    dispatch(login({ email, password }))
+    .unwrap()
+    .then((user) => {
+      console.log(user);
+      navigate('/dashboard');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
   };
   return (
     <div className='min-h-[80vh] flex items-center justify-center'>

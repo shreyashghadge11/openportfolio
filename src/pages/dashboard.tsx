@@ -7,7 +7,7 @@ import { Project } from '../components/informationCollection';
 import Theme2 from '../components/theme2';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useNavigate } from 'react-router-dom';
-
+import { logout, validateToken } from '../slices/userSlice';
 
 export interface PortfolioData {
   name: string;
@@ -44,11 +44,20 @@ const Dashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('token') === null){
-      dispatch({ type: 'user/logout' });
+      dispatch(logout());
       navigate('/login');
     }
     else{
-      dispatch({ type: 'user/login', payload: { email: email, username: username } });
+      dispatch(validateToken(localStorage.getItem('token') as string))
+      .unwrap()
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(logout());
+        navigate('/login');
+      });
     }
   }, []);
 
