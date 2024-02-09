@@ -25,14 +25,14 @@ export const login = createAsyncThunk(
       email: "email",
       username: "username",
     };
-    if (true) {
+    if (false) {
       localStorage.setItem("token", res.token);
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 7);
       localStorage.setItem("tokenExpiry", expirationDate.getTime().toString());
       return res;
     } else {
-      throw new Error("error");
+      throw new Error("Wrong email or password!");
     }
   }
 );
@@ -65,7 +65,7 @@ export const validateToken = createAsyncThunk(
 
 export const logout = createAsyncThunk("user/logout", async () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("tokenExpiry");
+  localStorage.removeItem("tokenExpiry");   
   return;
 });
 
@@ -104,6 +104,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
     });
     builder.addCase(login.rejected, (state, action) => {
+        console.log(action.error);
       state.isLoading = false;
       state.error = action.error.message;
     });
