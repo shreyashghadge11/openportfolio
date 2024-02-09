@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector((state) => state.user);
+  const { isAuthenticated, error } = useAppSelector((state) => state.user);
 
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -100,9 +100,10 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {error && <p className='text-red-500 text-sm'>{error}</p>}
 
         {/* Login Button */}
-        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full' onClick={handleLogin}>
+        <button className='bg-[#5E17EB] text-white px-4 py-2 mt-2 rounded-full w-full' onClick={handleLogin}>
           Login
         </button>
 

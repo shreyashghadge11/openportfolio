@@ -1,8 +1,10 @@
 // SignupPage.tsx
 
 import React from 'react';
+import { useAppSelector } from '../store/hooks';
 
 const SignupPage: React.FC = () => {
+  const { error } = useAppSelector((state) => state.user);
   return (
     <div className='min-h-[80vh] flex items-center justify-center'>
       <div className='p-8 bg-white rounded-md shadow-lg w-96'>
@@ -56,7 +58,9 @@ const SignupPage: React.FC = () => {
         </div>
 
         {/* Login Button */}
-        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full'>
+        {error && <p className='text-red-500 text-sm'>{error}</p>}
+
+        <button className='bg-[#5E17EB] text-white px-4 py-2 rounded-full w-full mt-2'>
           Signup
         </button>
       </div>
